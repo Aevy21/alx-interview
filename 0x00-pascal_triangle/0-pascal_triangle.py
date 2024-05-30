@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/python3
 """
 This script defines a function to generate Pascal's triangle up to the nth row.
 """
