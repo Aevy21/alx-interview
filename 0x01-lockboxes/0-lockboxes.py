@@ -4,18 +4,10 @@ Function to determine if all locked boxes can be opened.
 """
 
 
-def can_unlock_all(boxes):
+def canUnlockAll(boxes: List[List[int]]) -> bool:
+    """Determines if all the box items are opened.
+    Returns: True if they are all opened; False if not
     """
-    Determines if all locked boxes can be opened.
-
-    Args:
-    - boxes: a list of lists where each box may contain keys to other boxes.
-             A key with the same number as a box opens that box.
-
-    Returns:
-    - True if all boxes can be opened, else False.
-    """
-  
     unlockedBoxes = [0]
     boxNumber = len(boxes)
 
