@@ -16,16 +16,15 @@ def can_unlock_all(boxes):
     - True if all boxes can be opened, else False.
     """
   
-    n = len(boxes)
-    visited = [False] * n
-    visited[0] = True
-    queue = [0]
+    unlockedBoxes = [0]
+    boxNumber = len(boxes)
 
-    while queue:
-        box = queue.pop(0)
-        for key in boxes[box]:
-            if 0 <= key < n and not visited[key]:
-                visited[key] = True
-                queue.append(key)
+    for boxIndex in range(boxNumber):
+        for key in boxes[boxIndex]:
+            if key is not boxIndex:
+                if key > 0 and key < boxNumber and key not in unlockedBoxes:
+                    unlockedBoxes.append(key)
 
-    return all(visited)
+    if len(unlockedBoxes) < boxNumber:
+        return False
+    return True
