@@ -4,6 +4,8 @@ Function to determine if all locked boxes can be opened.
 """
 
 
+from typing import List
+
 def canUnlockAll(boxes: List[List[int]]) -> bool:
     """Determines if all the box items are opened.
     Returns: True if they are all opened; False if not
