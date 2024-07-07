@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-""" This script solves the N queens puzzle, which involves placing N non-attacking queens on an N×N chessboard. """
+""" This script solves the N queens puzzle """
 
 
 import sys
 
 
 def is_safe(board, row, col, N):
-    """Check if a queen can be placed on board at (row, col) without being attacked."""
+    """Check if a queen can be placed on board without being attacked."""
     # Check this row on the left side
     for i in range(col):
         if board[row][i] == 1:
@@ -24,12 +24,13 @@ def is_safe(board, row, col, N):
 
     return True
 
+
 def solve_nqueens(board, col, N, solutions):
     """Use backtracking to find all solutions for the N queens problem."""
     if col >= N:
         solutions.append([[r, board[r].index(1)] for r in range(N)])
         return True
-    
+
     res = False
     for i in range(N):
         if is_safe(board, i, col, N):
@@ -39,6 +40,7 @@ def solve_nqueens(board, col, N, solutions):
 
     return res
 
+
 def nqueens(N):
     """Initialize the board and solve the N queens problem."""
     board = [[0 for _ in range(N)] for _ in range(N)]
@@ -46,6 +48,7 @@ def nqueens(N):
     solve_nqueens(board, 0, N, solutions)
     for solution in solutions:
         print(solution)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
