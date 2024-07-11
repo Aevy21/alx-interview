@@ -1,8 +1,7 @@
 #!/usr/bin/node
-/* This script prints all characters of a Star Wars movie using the Star Wars API.*/
+// This script prints all characters of a Star Wars movie using the Star Wars API.
 
-
-const axios = require('axios');
+const request = require('request');
 const process = require('process');
 
 if (process.argv.length < 3) {
@@ -12,37 +11,45 @@ if (process.argv.length < 3) {
 
 const movieId = process.argv[2];
 
-const getMovieDetails = async (movieId) => {
+const getMovieDetails = (movieId, callback) => {
   const url = `https://swapi.dev/api/films/${movieId}/`;
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching movie details:', error);
-    process.exit(1);
-  }
-};
-
-const getCharacterName = async (characterUrl) => {
-  try {
-    const response = await axios.get(characterUrl);
-    return response.data.name;
-  } catch (error) {
-    console.error('Error fetching character name:', error);
-    return null;
-  }
-};
-
-const main = async (movieId) => {
-  const movieDetails = await getMovieDetails(movieId);
-  const characters = movieDetails.characters || [];
-
-  for (const characterUrl of characters) {
-    const name = await getCharacterName(characterUrl);
-    if (name) {
-      console.log(name);
+  request(url, (error, response, body) => {
+    if (error) {
+      console.error('Error fetching movie details:', error);
+      process.exit(1);
     }
-  }
+    callback(JSON.parse(body));
+  });
+};
+
+const getCharacterName = (characterUrl, callback) => {
+  request(characterUrl, (error, response, body) => {
+    if (error) {
+      console.error('Error fetching character name:', error);
+      callback(null);
+      return;
+    }
+    callback(JSON.parse(body).name);
+  });
+};
+
+const main = (movieId) => {
+  getMovieDetails(movieId, (movieDetails) => {
+    const characters = movieDetails.characters || [];
+    let count = 0;
+
+    characters.forEach((characterUrl) => {
+      getCharacterName(characterUrl, (name) => {
+        if (name) {
+          console.log(name);
+        }
+        count++;
+        if (count === characters.length) {
+          process.exit(0);
+        }
+      });
+    });
+  });
 };
 
 main(movieId);
