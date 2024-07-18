@@ -6,9 +6,14 @@ Rotate an n x n 2D matrix 90 degrees clockwise in-place.
 
 def rotate_2d_matrix(matrix):
     """
+    Rotate an n x n 2D matrix 90 degrees clockwise in-place.
+
+    Args:
     - matrix (list of list of int): The matrix to rotate. Must be square.
+
     Returns:
     - None: The matrix is edited in-place.
+
     Raises:
     - ValueError: If the input matrix is not square.
     """
@@ -25,4 +30,4 @@ def rotate_2d_matrix(matrix):
 
     # Step 2: Reverse each row
     for i in range(n):
-        matrix[i].reverse();
+        matrix[i].reverse()
