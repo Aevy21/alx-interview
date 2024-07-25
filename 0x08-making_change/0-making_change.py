@@ -6,7 +6,7 @@ Dynamic Programming Solution to Make Change with the Fewest Coins
 
 def makeChange(coins, total):
     """
-    Determine the fewest number of coins needed to make a given total using dynamic programming.
+    Determine the fewest number of coins needed to make a given total .
 
     Args:
     - coins (list of int): The values of the coins available.
