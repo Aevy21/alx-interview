@@ -25,8 +25,8 @@ def island_perimeter(grid):
                 # Add 4 for the current land cell
                 perimeter += 4
 
-                # Check for neighboring land cells and reduce perim if shared sides exist
-                if i > 0 and grid[i - 1][j] == 1:  # Check the top cell
+                # Check neighboring land cells and reduce perim if shared sides exist
+                if i > 0 and grid[i - 1][j] == 1:  # Check top cell
                     perimeter -= 1
                 if i < rows - 1 and grid[i + 1][j] == 1:  # Check bottom cell
                     perimeter -= 1
